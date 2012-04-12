@@ -9,8 +9,8 @@ module Uniquify
       options = { :length => 8, :chars => ('a'..'z').to_a + ('A'..'Z').to_a + ('0'..'9').to_a }
       options.merge!(args.pop) if args.last.kind_of? Hash
       
-      class_inheritable_reader(:uniquify_options)
-      write_inheritable_attribute(:uniquify_options, options)
+      class_attribute(:uniquify_options)
+      self.uniquify_options = options
       
       args.each do |name|
         before_validation :on => :create do |record|
